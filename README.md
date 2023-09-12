@@ -44,8 +44,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<!-- markdownlint-enable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://shared-mind.tumblr.com/"><img src="https://avatars.githubusercontent.com/u/477458?v=4?s=80" width="80px;" alt="Pedro Januário"/><br /><sub><b>Pedro Januário</b></sub></a><br /><a href="https://github.com/pjanuario/pyecoforest/commits?author=pjanuario" title="Code">💻</a> <a href="#ideas-pjanuario" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/pjanuario/pyecoforest/commits?author=pjanuario" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-end -->
 

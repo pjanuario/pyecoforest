@@ -9,7 +9,19 @@
   "imageSize": 80,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "pjanuario",
+      "name": "Pedro Januário",
+      "avatar_url": "https://avatars.githubusercontent.com/u/477458?v=4",
+      "profile": "http://shared-mind.tumblr.com/",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc"
+      ]
+    }
+  ],
   "contributorsPerLine": 7,
   "skipCi": true
 }
