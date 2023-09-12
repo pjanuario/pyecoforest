@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: 0f501ed
+_src_path: gh:browniebroke/pypackage-template
+add_me_as_contributor: true
+copyright_year: '2023'
+documentation: true
+email: prnjanuario@gmail.com
+full_name: Pedro Januário
+github_username: pjanuario
+initial_commit: true
+open_source_license: MIT
+package_name: pyecoforest
+project_name: pyecoforest
+project_short_description: Python library for ecoforest local device.
+project_slug: pyecoforest
+run_poetry_install: true
+setup_github: true
+setup_pre_commit: true
+
