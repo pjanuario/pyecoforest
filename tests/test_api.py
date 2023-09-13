@@ -38,7 +38,3 @@ async def test_status():
     actual = await target.status()
     assert actual is not None
     assert actual == Status(False, State.OFF, 3, 23.5)
-    respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1002.txt"))
-    )
-    actual = await target.status()

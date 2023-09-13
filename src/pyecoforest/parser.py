@@ -35,7 +35,7 @@ def _parse_state(state: str) -> State:
     }
 
     for k, v in states.items():
-        if state in v:
-            return State(k)
+        if int(state) in v:
+            return State[k]
 
     raise EcoforestError(f"The state {state} is not a valid state!")
