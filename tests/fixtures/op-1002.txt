@@ -1,0 +1,10 @@
+error_MODO_on_off=0
+on_off=0
+modo_operacion=0
+modo_func=1
+estado=0
+consigna_potencia=3
+consigna_temperatura=20.5
+temperatura=23.5
+temperatura_ext=---.-
+0%

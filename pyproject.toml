@@ -24,10 +24,13 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
+httpx = "^0.25.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
 pytest-cov = "^3.0"
+respx = "^0.20.2"
+pytest-asyncio = "^0.21.1"
 
 [tool.poetry.group.docs]
 optional = true
