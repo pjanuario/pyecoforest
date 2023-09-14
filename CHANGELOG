@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.1 (2023-09-14)
+
+### Fix
+
+- Downgrade httpx minimal requirement ([`bc8f0c7`](https://github.com/pjanuario/pyecoforest/commit/bc8f0c7f07b5a25dae5ca138a18211af9a17da21))
+- Downgrade httpx minimal requirement ([`b8eeb95`](https://github.com/pjanuario/pyecoforest/commit/b8eeb95ef2339ab48563d9e5ae579274f20c3573))
+
 ## v0.1.0 (2023-09-14)
 
 ### Feature
