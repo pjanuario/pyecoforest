@@ -1,0 +1,17 @@
+# Changelog
+
+## v0.1.0 (2023-09-14)
+
+### Feature
+
+- Retrieve ecoforest device status ([`f47ab4f`](https://github.com/pjanuario/pyecoforest/commit/f47ab4f9228f4de994c2159659a442afa9008785))
+- Retrieve ecoforest device status ([`d048053`](https://github.com/pjanuario/pyecoforest/commit/d04805356d6aa0609e039309425601ef271920f8))
+
+### Test
+
+- Fix broken test matrix and ensure support from python^3.10 ([`ac02ddf`](https://github.com/pjanuario/pyecoforest/commit/ac02ddfc5028960471e2610d6e66dee78fdfa902))
+- Fix broken tests and precommit configuration to prevent changing fixtures ([`87561da`](https://github.com/pjanuario/pyecoforest/commit/87561da3b7337f34cff82eace850e06e94f3f8ef))
+
+### Documentation
+
+- Add @pjanuario as a contributor ([`ef36592`](https://github.com/pjanuario/pyecoforest/commit/ef36592de1c93d8633a2f87820ad01dbbf3c67e2))

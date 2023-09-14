@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyecoforest"
-version = "0.0.0"
+version = "0.1.0"
 description = "Python library for ecoforest local device."
 authors = ["Pedro Januário <prnjanuario@gmail.com>"]
 license = "MIT"
