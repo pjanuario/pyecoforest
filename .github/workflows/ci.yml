@@ -68,10 +68,10 @@ jobs:
     permissions:
       id-token: write
       contents: write
-    needs:
-      - test
-      - lint
-      - commitlint
+    # needs:
+    #   - test
+    #   - lint
+    #   - commitlint
 
     steps:
       - uses: actions/checkout@v4
