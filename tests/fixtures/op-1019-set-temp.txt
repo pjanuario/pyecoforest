@@ -1,0 +1,2 @@
+error_set_temperatura_consigna=0
+0%

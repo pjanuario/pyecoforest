@@ -1,0 +1,4 @@
+hemos chegado set power 1
+1
+error_set_potencia=0
+0%
