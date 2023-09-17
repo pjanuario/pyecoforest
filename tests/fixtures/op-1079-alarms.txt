@@ -1,0 +1,3 @@
+error_get_alarmas=0
+get_alarmas=N
+0%
