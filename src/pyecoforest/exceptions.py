@@ -9,6 +9,10 @@ class EcoforestError(Exception):
     """Base class for Ecoforest exceptions."""
 
 
+class EcoforestConnectionError(EcoforestError):
+    """Ecoforest connection exception."""
+
+
 class EcoforestAuthenticationRequired(EcoforestError):
     """Exception raised when authentication failed."""
 

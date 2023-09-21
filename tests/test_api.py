@@ -1,8 +1,8 @@
 from pathlib import Path
 
+import httpx
 import pytest
 import respx
-from httpx import Response
 
 from pyecoforest.api import EcoforestApi
 from pyecoforest.const import (
@@ -13,6 +13,10 @@ from pyecoforest.const import (
     API_STATS_OP,
     API_STATUS_OP,
     URL_CGI,
+)
+from pyecoforest.exceptions import (
+    EcoforestAuthenticationRequired,
+    EcoforestConnectionError,
 )
 from pyecoforest.models.device import Device, OperationMode, State
 
@@ -44,13 +48,13 @@ async def test_get():
     """Get status information."""
     target = _get_target()
     respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1002-status.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1002-status.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_STATS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1020-stats.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1020-stats.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_ALARMS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1079-alarms.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1079-alarms.txt"))
     )
     actual = await target.get()
     assert actual is not None
@@ -75,11 +79,51 @@ async def test_get():
 
 @pytest.mark.asyncio
 @respx.mock
+@pytest.mark.parametrize(
+    ("side_effect", "expected", "message"),
+    [
+        (
+            httpx.Response(401),
+            EcoforestAuthenticationRequired,
+            "401",
+        ),
+        (
+            httpx.TimeoutException("timeout"),
+            EcoforestConnectionError,
+            "Timeout occurred while connecting to the device.",
+        ),
+        (
+            httpx.Response(500),
+            EcoforestConnectionError,
+            "Error occurred while communicating with device.",
+        ),
+    ],
+)
+async def test_get_errors(side_effect, expected, message):
+    """Get status information with error."""
+    target = _get_target()
+    respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
+        side_effect=side_effect
+    )
+    respx.post(path=URL_CGI, data={"idOperacion": API_STATS_OP}).mock(
+        side_effect=side_effect
+    )
+    respx.post(path=URL_CGI, data={"idOperacion": API_ALARMS_OP}).mock(
+        side_effect=side_effect
+    )
+
+    with pytest.raises(expected) as err:
+        await target.get()
+    assert str(err.value) == message
+
+
+@pytest.mark.asyncio
+@respx.mock
 async def test_set_temperature():
     """Set target temperature."""
     target = _get_target()
     respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
-        return_value=Response(
+        return_value=httpx.Response(
             200,
             text=_mutate_fixture(
                 "op-1002-status.txt",
@@ -88,14 +132,15 @@ async def test_set_temperature():
         )
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_STATS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1020-stats.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1020-stats.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_ALARMS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1079-alarms.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1079-alarms.txt"))
     )
     respx.post(
         path=URL_CGI, data={"idOperacion": API_SET_TEMP_OP, "temperatura": 23.5}
-    ).mock(return_value=Response(200, text=_load_fixture("op-1019-set-temp.txt")))
+    ).mock(return_value=httpx.Response(200, text=_load_fixture("op-1019-set-temp.txt")))
+
     actual = await target.set_temperature(23.5)
     assert actual is not None
     assert actual == Device(
@@ -123,7 +168,7 @@ async def test_set_power():
     """Set target power."""
     target = _get_target()
     respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
-        return_value=Response(
+        return_value=httpx.Response(
             200,
             text=_mutate_fixture(
                 "op-1002-status.txt", [("consigna_potencia=3", "consigna_potencia=5")]
@@ -131,14 +176,17 @@ async def test_set_power():
         )
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_STATS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1020-stats.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1020-stats.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_ALARMS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1079-alarms.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1079-alarms.txt"))
     )
     respx.post(
         path=URL_CGI, data={"idOperacion": API_SET_POWER_OP, "potencia": 5}
-    ).mock(return_value=Response(200, text=_load_fixture("op-1004-set-power.txt")))
+    ).mock(
+        return_value=httpx.Response(200, text=_load_fixture("op-1004-set-power.txt"))
+    )
+
     actual = await target.set_power(5)
     assert actual is not None
     assert actual == Device(
@@ -166,7 +214,7 @@ async def test_turn():
     """Turn on device status."""
     target = _get_target()
     respx.post(path=URL_CGI, data={"idOperacion": API_STATUS_OP}).mock(
-        return_value=Response(
+        return_value=httpx.Response(
             200,
             text=_mutate_fixture(
                 "op-1002-status.txt",
@@ -175,14 +223,15 @@ async def test_turn():
         )
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_STATS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1020-stats.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1020-stats.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_ALARMS_OP}).mock(
-        return_value=Response(200, text=_load_fixture("op-1079-alarms.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1079-alarms.txt"))
     )
     respx.post(path=URL_CGI, data={"idOperacion": API_SET_STATE_OP, "on_off": 1}).mock(
-        return_value=Response(200, text=_load_fixture("op-1004-set-power.txt"))
+        return_value=httpx.Response(200, text=_load_fixture("op-1004-set-power.txt"))
     )
+
     actual = await target.turn(True)
     assert actual is not None
     assert actual == Device(
