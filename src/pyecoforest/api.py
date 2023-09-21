@@ -16,7 +16,7 @@ from .const import (
     LOCAL_TIMEOUT,
     URL_CGI,
 )
-from .exceptions import EcoforestAuthenticationRequired
+from .exceptions import EcoforestAuthenticationRequired, EcoforestConnectionError
 from .ssl import NO_VERIFY_SSL_CONTEXT
 
 _LOGGER = logging.getLogger(__name__)
@@ -75,19 +75,29 @@ class EcoforestApi:
         if _LOGGER.isEnabledFor(logging.DEBUG):
             _LOGGER.debug("Sending POST to %s with data %s", URL_CGI, data)
 
-        response = await self._client.post(
-            URL_CGI,
-            auth=self._auth,
-            timeout=self._timeout,
-            data=data,
-        )
-
-        status_code = response.status_code
-        if status_code in (HTTPStatus.UNAUTHORIZED, HTTPStatus.FORBIDDEN):
-            raise EcoforestAuthenticationRequired(
-                f"Authentication failed for {URL_CGI} with status {status_code}, "
-                "please check your username/password."
+        try:
+            response = await self._client.post(
+                URL_CGI,
+                auth=self._auth,
+                timeout=self._timeout,
+                data=data,
             )
+            response.raise_for_status()
+        except httpx.TimeoutException as error:
+            raise EcoforestConnectionError(
+                "Timeout occurred while connecting to the device."
+            ) from error
+        except httpx.HTTPError as error:
+            if error.response.status_code in (
+                HTTPStatus.UNAUTHORIZED,
+                HTTPStatus.FORBIDDEN,
+            ):
+                raise EcoforestAuthenticationRequired(
+                    error.response.status_code
+                ) from error
+            raise EcoforestConnectionError(
+                "Error occurred while communicating with device."
+            ) from error
 
         parsed = self._parse(response.text)
 
