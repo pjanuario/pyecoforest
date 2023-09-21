@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.0 (2023-09-21)
+
+### Feature
+
+- Improve sdk error handling ([`7671271`](https://github.com/pjanuario/pyecoforest/commit/767127178007f52634f769e33e3e5ad296ab9fbb))
+- Improve sdk error handling ([`65ab966`](https://github.com/pjanuario/pyecoforest/commit/65ab9669da01a443b55a5b7d18fe64da88678d48))
+
 ## v0.2.0 (2023-09-17)
 
 ### Feature
