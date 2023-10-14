@@ -5,6 +5,8 @@ URL_CGI = "/recepcion_datos_4.cgi"
 
 MODEL_NAME = "Cordoba glass"
 
+SUPPORTED_MODELS = ["CC2014_v2"]  # Cordoba glass
+
 # API status operation code
 API_STATUS_OP = 1002
 API_STATS_OP = 1020

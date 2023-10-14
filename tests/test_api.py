@@ -59,6 +59,7 @@ async def test_get():
     actual = await target.get()
     assert actual is not None
     assert actual == Device(
+        is_supported=True,
         model="CC2014_v2",
         model_name="Cordoba glass",
         firmware="30Abr19_v2z",
@@ -74,6 +75,15 @@ async def test_get():
         cpu_temperature=32.3,
         gas_temperature=28.1,
         ntc_temperature=25,
+        depression=2,
+        working_hours=6826,
+        ignitions=1152,
+        live_pulse=0.0,
+        pulse_offset=0.0,
+        working_state=0,
+        extractor=0,
+        working_level=0,
+        convecto_air_flow=0.0,
     )
 
 
@@ -144,6 +154,7 @@ async def test_set_temperature():
     actual = await target.set_temperature(23.5)
     assert actual is not None
     assert actual == Device(
+        is_supported=True,
         model="CC2014_v2",
         model_name="Cordoba glass",
         firmware="30Abr19_v2z",
@@ -159,6 +170,15 @@ async def test_set_temperature():
         cpu_temperature=32.3,
         gas_temperature=28.1,
         ntc_temperature=25,
+        depression=2,
+        working_hours=6826,
+        ignitions=1152,
+        live_pulse=0.0,
+        pulse_offset=0.0,
+        working_state=0,
+        extractor=0,
+        working_level=0,
+        convecto_air_flow=0.0,
     )
 
 
@@ -190,6 +210,7 @@ async def test_set_power():
     actual = await target.set_power(5)
     assert actual is not None
     assert actual == Device(
+        is_supported=True,
         model="CC2014_v2",
         model_name="Cordoba glass",
         firmware="30Abr19_v2z",
@@ -205,6 +226,15 @@ async def test_set_power():
         cpu_temperature=32.3,
         gas_temperature=28.1,
         ntc_temperature=25,
+        depression=2,
+        working_hours=6826,
+        ignitions=1152,
+        live_pulse=0.0,
+        pulse_offset=0.0,
+        working_state=0,
+        extractor=0,
+        working_level=0,
+        convecto_air_flow=0.0,
     )
 
 
@@ -235,6 +265,7 @@ async def test_turn():
     actual = await target.turn(True)
     assert actual is not None
     assert actual == Device(
+        is_supported=True,
         model="CC2014_v2",
         model_name="Cordoba glass",
         firmware="30Abr19_v2z",
@@ -250,4 +281,13 @@ async def test_turn():
         cpu_temperature=32.3,
         gas_temperature=28.1,
         ntc_temperature=25,
+        depression=2,
+        working_hours=6826,
+        ignitions=1152,
+        live_pulse=0.0,
+        pulse_offset=0.0,
+        working_state=0,
+        extractor=0,
+        working_level=0,
+        convecto_air_flow=0.0,
     )
