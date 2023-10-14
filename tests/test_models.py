@@ -4,6 +4,37 @@ from pyecoforest.exceptions import EcoforestError
 from pyecoforest.models.device import Alarm, Device, OperationMode, State
 
 
+def get_api_data():
+    return {
+        "status": {
+            "on_off": "0",
+            "estado": "0",
+            "consigna_potencia": "6",
+            "consigna_temperatura": "22",
+            "temperatura": "24.5",
+            "modo_operacion": "0",
+        },
+        "stats": {
+            "Me": "model-version",
+            "Vs": "firmware-version",
+            "Ns": "serial-number",
+            "Tp": "33.5",
+            "Th": "36.5",
+            "Tn": "23.5",
+            "Da": "002",
+            "Nh": "000006826",
+            "Ne": "001152",
+            "Pn": "0.0",
+            "Pf": "0.0",
+            "Es": "0",
+            "Ex": "0.0",
+            "Ni": "0",
+            "Co": "0.0",
+        },
+        "alarms": {"get_alarmas": "A099"},
+    }
+
+
 def test_operation_mode_build():
     assert OperationMode.build("0") == OperationMode.POWER
     assert OperationMode.build("1") == OperationMode.TEMPERATURE
@@ -39,27 +70,8 @@ def test_alarm_build():
 
 
 def test_device_build():
-    assert Device.build(
-        {
-            "status": {
-                "on_off": "0",
-                "estado": "0",
-                "consigna_potencia": "6",
-                "consigna_temperatura": "22",
-                "temperatura": "24.5",
-                "modo_operacion": "0",
-            },
-            "stats": {
-                "Me": "model-version",
-                "Vs": "firmware-version",
-                "Ns": "serial-number",
-                "Tp": "33.5",
-                "Th": "36.5",
-                "Tn": "23.5",
-            },
-            "alarms": {"get_alarmas": "A099"},
-        }
-    ) == Device(
+    assert Device.build(get_api_data()) == Device(
+        is_supported=False,
         model="model-version",
         model_name="Cordoba glass",
         firmware="firmware-version",
@@ -75,4 +87,19 @@ def test_device_build():
         cpu_temperature=33.5,
         gas_temperature=36.5,
         ntc_temperature=23.5,
+        depression=2,
+        working_hours=6826,
+        ignitions=1152,
+        live_pulse=0.0,
+        pulse_offset=0.0,
+        working_state=0,
+        extractor=0,
+        working_level=0,
+        convecto_air_flow=0.0,
     )
+
+
+def test_device_build_with_supportted_device():
+    data = get_api_data()
+    data["stats"]["Me"] = "CC2014_v2"
+    assert Device.build(data).is_supported is True

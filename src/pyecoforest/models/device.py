@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from pyecoforest.const import MODEL_NAME
+from pyecoforest.const import MODEL_NAME, SUPPORTED_MODELS
 from pyecoforest.exceptions import EcoforestError
 
 
@@ -91,6 +91,7 @@ class Device:
     """Model for the Ecoforest stove."""
 
     # model information
+    is_supported: bool
     firmware: str
     model: str
     model_name: str
@@ -112,6 +113,15 @@ class Device:
     cpu_temperature: float | None = None
     gas_temperature: float | None = None
     ntc_temperature: float | None = None
+    depression: int | None = None
+    working_hours: int | None = None
+    working_state: int | None = None
+    working_level: int | None = None
+    ignitions: int | None = None
+    live_pulse: float | None = None
+    pulse_offset: float | None = None
+    extractor: float | None = None
+    convecto_air_flow: float | None = None
 
     @classmethod
     def build(cls, data: dict[str, dict[str, str]]) -> Device:
@@ -119,8 +129,10 @@ class Device:
         status = data["status"]
         stats = data["stats"]
         alarms = data["alarms"]
+        model = stats["Me"]
         return Device(
-            model=stats["Me"],
+            is_supported=model in SUPPORTED_MODELS,
+            model=model,
             model_name=MODEL_NAME,
             firmware=stats["Vs"],
             serial_number=stats["Ns"],
@@ -135,4 +147,13 @@ class Device:
             cpu_temperature=float(stats["Tp"]),
             gas_temperature=float(stats["Th"]),
             ntc_temperature=float(stats["Tn"]),
+            depression=int(stats["Da"]),
+            working_hours=int(stats["Nh"]),
+            ignitions=int(stats["Ne"]),
+            live_pulse=float(stats["Pn"]),
+            pulse_offset=float(stats["Pf"]),
+            working_state=int(stats["Es"]),
+            extractor=float(stats["Ex"]),
+            working_level=int(stats["Ni"]),
+            convecto_air_flow=float(stats["Co"]),
         )
