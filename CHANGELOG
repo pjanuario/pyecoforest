@@ -1,35 +1,65 @@
 # Changelog
 
+## v0.4.0 (2023-10-18)
+
+### Feature
+
+- Feat: added additional sensors (#14)
+
+feat: added additional sensors (#14)
+ ([`7148db8`](https://github.com/pjanuario/pyecoforest/commit/7148db848147fc0484b7c7411e0e27d99b900d8c))
+- Feat: added additional sensors
+ ([`9fa97d6`](https://github.com/pjanuario/pyecoforest/commit/9fa97d6d044c107f32b5095dc81f1d6adeb08b40))
+
+### Unknown
+
+- Merge pull request #13 from pjanuario/update/poetry-upgrade
+
+chore(deps): upgrade dependencies ([`f7a7eca`](https://github.com/pjanuario/pyecoforest/commit/f7a7ecadc6f9c25be6d753a8342bd42bb64e73cf))
+
 ## v0.3.0 (2023-09-21)
 
 ### Feature
 
-- Improve sdk error handling ([`7671271`](https://github.com/pjanuario/pyecoforest/commit/767127178007f52634f769e33e3e5ad296ab9fbb))
-- Improve sdk error handling ([`65ab966`](https://github.com/pjanuario/pyecoforest/commit/65ab9669da01a443b55a5b7d18fe64da88678d48))
+- Feat: improve sdk error handling
+
+ ([`7671271`](https://github.com/pjanuario/pyecoforest/commit/767127178007f52634f769e33e3e5ad296ab9fbb))
+- Feat: improve sdk error handling
+ ([`65ab966`](https://github.com/pjanuario/pyecoforest/commit/65ab9669da01a443b55a5b7d18fe64da88678d48))
 
 ## v0.2.0 (2023-09-17)
 
 ### Feature
 
-- Refactored the sdk interface and added other device properties and functionalities (#10) ([`adb8d92`](https://github.com/pjanuario/pyecoforest/commit/adb8d9240142c8802f7ce5a58008b231fab2e26b))
-- Refactored the sdk interface and added other device properties and functionalities ([`e7df1d2`](https://github.com/pjanuario/pyecoforest/commit/e7df1d2cb27b8af7d9a4bdea34af748de73f294c))
+- Feat: refactored the sdk interface and added other device properties and functionalities (#10)
+
+ ([`adb8d92`](https://github.com/pjanuario/pyecoforest/commit/adb8d9240142c8802f7ce5a58008b231fab2e26b))
+- Feat: refactored the sdk interface and added other device properties and functionalities
+ ([`e7df1d2`](https://github.com/pjanuario/pyecoforest/commit/e7df1d2cb27b8af7d9a4bdea34af748de73f294c))
 
 ### Fix
 
-- Downgrade httpx minimal requirement ([`b8eeb95`](https://github.com/pjanuario/pyecoforest/commit/b8eeb95ef2339ab48563d9e5ae579274f20c3573))
+- Fix: downgrade httpx minimal requirement
+ ([`b8eeb95`](https://github.com/pjanuario/pyecoforest/commit/b8eeb95ef2339ab48563d9e5ae579274f20c3573))
 
 ## v0.1.0 (2023-09-14)
 
 ### Feature
 
-- Retrieve ecoforest device status ([`f47ab4f`](https://github.com/pjanuario/pyecoforest/commit/f47ab4f9228f4de994c2159659a442afa9008785))
-- Retrieve ecoforest device status ([`d048053`](https://github.com/pjanuario/pyecoforest/commit/d04805356d6aa0609e039309425601ef271920f8))
+- Feat: retrieve ecoforest device status
+
+this merge requests adds a new feature to the module allowing a user to retrieve the status of the device. ([`f47ab4f`](https://github.com/pjanuario/pyecoforest/commit/f47ab4f9228f4de994c2159659a442afa9008785))
+- Feat: retrieve ecoforest device status
+ ([`d048053`](https://github.com/pjanuario/pyecoforest/commit/d04805356d6aa0609e039309425601ef271920f8))
 
 ### Test
 
-- Fix broken test matrix and ensure support from python^3.10 ([`ac02ddf`](https://github.com/pjanuario/pyecoforest/commit/ac02ddfc5028960471e2610d6e66dee78fdfa902))
-- Fix broken tests and precommit configuration to prevent changing fixtures ([`87561da`](https://github.com/pjanuario/pyecoforest/commit/87561da3b7337f34cff82eace850e06e94f3f8ef))
+- Test: fix broken test matrix and ensure support from python^3.10
+ ([`ac02ddf`](https://github.com/pjanuario/pyecoforest/commit/ac02ddfc5028960471e2610d6e66dee78fdfa902))
+- Test: fix broken tests and precommit configuration to prevent changing fixtures
+ ([`87561da`](https://github.com/pjanuario/pyecoforest/commit/87561da3b7337f34cff82eace850e06e94f3f8ef))
 
 ### Documentation
 
-- Add @pjanuario as a contributor ([`ef36592`](https://github.com/pjanuario/pyecoforest/commit/ef36592de1c93d8633a2f87820ad01dbbf3c67e2))
+- Docs: add @pjanuario as a contributor
+ ([`ef36592`](https://github.com/pjanuario/pyecoforest/commit/ef36592de1c93d8633a2f87820ad01dbbf3c67e2))
