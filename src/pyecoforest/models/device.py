@@ -50,7 +50,7 @@ class State(Enum):
             "PRE_HEATING": [5, 6],
             "ON": [7],
             "SHUTTING_DOWN": [8, 11, -3],
-            "STAND_BY": [-20],
+            "STAND_BY": [-20, 20],
             "ALARM": [-4],
         }
 

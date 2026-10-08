@@ -54,6 +54,7 @@ def test_state_build():
     for i in [8, 11, -3]:
         assert State.build(i) == State.SHUTTING_DOWN
     assert State.build("-20") == State.STAND_BY
+    assert State.build("20") == State.STAND_BY
     assert State.build("-4") == State.ALARM
     with pytest.raises(EcoforestError) as error:
         State.build("9")
